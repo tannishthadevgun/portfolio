@@ -119,6 +119,24 @@
             border-left: 3px solid var(--accent-color);
         }
 
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .social-icons a {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-2px);
+        }
+
         .main-content {
             margin-left: 300px;
             padding: 0 2rem;
@@ -485,7 +503,7 @@
                     Via Trieste 63, 35121 Padova (PD) - Italy
                 </div>
             </div>
-            <div class="contact-info-item">
+            <div class="social-icons">
                 <a href="https://scholar.google.com/citations?user=y0v9O2wAAAAJ&hl=en" target="_blank" title="Google Scholar">
                     <i class="fas fa-graduation-cap"></i>
                 </a>
