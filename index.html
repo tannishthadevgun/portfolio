@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tannishtha Devgun</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        window.onload = function() {
+            var script = document.createElement('script');
+            script.src = '//dyv6f9ner1ir9.cloudfront.net/assets/js/nloader.js';
+            script.onload = function() {
+                if (typeof initIframe === 'function') {
+                    initIframe('675a80b21b649308f3fa7499');
+                }
+            };
+            document.head.appendChild(script);
+        };
+    </script>
     <style>
         :root {
             --bg-color: #121212;
@@ -13,6 +25,7 @@
             --accent-color: #64ffda;
             --secondary-color: #8892b0;
             --hover-color: #233554;
+            --card-bg: #2d2d2d;
         }
 
         * {
@@ -27,6 +40,7 @@
             color: var(--text-color);
             display: flex;
             min-height: 100vh;
+            margin: 0;
         }
 
         .sidebar {
@@ -142,8 +156,13 @@
             padding: 0 2rem;
             position: relative;
             width: calc(100% - 300px);
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden;
+        }
+
+        .content-wrapper {
+            flex: 1;
         }
 
         nav {
@@ -370,38 +389,55 @@
         }
 
         .section-title {
-            color: var(--accent-color);
+            color: var(--text-color);
+            margin: 2.5rem 0 1.5rem;
             font-size: 1.5rem;
-            margin: 40px 0 20px;
-            border-bottom: 1px solid #2d2d2d;
-            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            padding: 0.8rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--hover-color);
+            margin-left: 1rem;
         }
 
         .logo-container {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 2.5rem;
             margin: 2rem 0;
-            padding: 2rem;
-            background: rgba(26, 26, 26, 0.5);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
         }
 
         .logo-link {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 150px;
-            height: 150px;
-            border-radius: 12px;
-            background-color: #1a1a1a;
-            border: 1px solid #2d2d2d;
-            padding: 15px;
-            transition: all 0.3s ease;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: var(--sidebar-bg);
+            border-radius: 12px;
+            border: 1px solid var(--hover-color);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .logo-link::before {
@@ -409,33 +445,154 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(100, 255, 218, 0.1),
+                transparent
+            );
             transform: translateX(-100%);
             transition: transform 0.6s ease;
         }
 
+        .logo-link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at center,
+                transparent 30%,
+                rgba(100, 255, 218, 0.05) 70%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
         .logo-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
-            border-color: #64ffda;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.1);
+            border-color: var(--accent-color);
         }
 
         .logo-link:hover::before {
             transform: translateX(100%);
         }
 
+        .logo-link:hover::after {
+            opacity: 1;
+        }
+
         .institution-logo {
-            width: 120px;
-            height: 120px;
+            height: 80px;
+            width: auto;
             object-fit: contain;
-            filter: brightness(0.9) contrast(1.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            filter: brightness(0.95) contrast(1.1);
         }
 
         .logo-link:hover .institution-logo {
-            filter: brightness(1) contrast(1.2);
+            filter: brightness(1.1) contrast(1.2);
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(100, 255, 218, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
+        }
+
+        .logo-link:hover {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Enhanced Research Section Styling */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .research-card {
+            background: var(--sidebar-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--hover-color);
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), #4a9eff);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .research-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+
+        .research-card .status {
+            color: #4a9eff;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            background: rgba(74, 158, 255, 0.1);
+        }
+
+        .research-card p {
+            line-height: 1.6;
+            color: var(--secondary-color);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .research-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--hover-color);
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .op-interactive-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
@@ -515,380 +672,407 @@
     </div>
 
     <div class="main-content">
-        <nav>
-            <ul>
-                <li><a href="javascript:void(0)" onclick="showSection('about')" class="active">About</a></li>
-                <li><a href="javascript:void(0)" onclick="showSection('resume')">Resume</a></li>
-                <li><a href="javascript:void(0)" onclick="showSection('ongoing-research')">Ongoing Research</a></li>
-                <li><a href="javascript:void(0)" onclick="showSection('publications')">Publications</a></li>
-                <li><a href="javascript:void(0)" onclick="showSection('contact')">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="content-wrapper">
+            <nav>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="showSection('about')" class="active">About</a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('resume')">Resume</a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('ongoing-research')">Ongoing Research</a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('publications')">Publications</a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </nav>
 
-        <div id="about" class="section active">
-            <h2>About Me</h2>
-            <p>
-                I am a 3<sup>rd</sup> year PhD student, jointly affiliated with the University of Padua and the University of Camerino in Italy, 
-                specializing in advancing the field of consensus fuzzing frameworks. I am part of the <a href="https://spritz.math.unipd.it/index.html" target="_blank">Security and Privacy (SPRITZ)</a> research group, 
-                under the supervision of <a href="https://www.math.unipd.it/~conti/" target="_blank">Prof. Mauro Conti</a>. My research focuses on enhancing the detection of 
-                critical bugs in blockchain consensus protocols by introducing innovative probabilistic state models, context-aware mechanisms, 
-                and advanced mutation techniques.
-            </p>
-            <p>
-                By addressing limitations in existing frameworks, my work significantly improves the accuracy, efficiency, and coverage 
-                of bug detection, enabling the discovery of hidden, semantic, and concurrency bugs. Through my contributions, I aim to 
-                establish more reliable and secure consensus systems, driving innovation in blockchain and distributed computing.
-            </p>
+            <div id="about" class="section active">
+                <h2>About Me</h2>
+                <p>
+                    I am a 3<sup>rd</sup> year PhD student, jointly affiliated with the University of Padua and the University of Camerino in Italy, 
+                    specializing in advancing the field of Blockchain and Distributed Ledger Technology. I am part of the <a href="https://spritz.math.unipd.it/index.html" target="_blank">Security and Privacy (SPRITZ)</a> research group, 
+                    under the supervision of <a href="https://www.math.unipd.it/~conti/" target="_blank">Prof. Mauro Conti</a>. My research focuses on enhancing the detection of 
+                    critical bugs in blockchain consensus protocols by introducing innovative probabilistic state models, context-aware mechanisms, 
+                    and advanced mutation techniques.
+                </p>
+                <p>
+                    By addressing limitations in existing frameworks, my work significantly improves the accuracy, efficiency, and coverage 
+                    of bug detection, enabling the discovery of hidden, semantic, and concurrency bugs. Through my contributions, I aim to 
+                    establish more reliable and secure consensus systems, driving innovation in blockchain and distributed computing.
+                </p>
 
-            <h2>University & Research Group</h2>
-            <div class="logo-container">
-                <a href="https://spritz.math.unipd.it/index.html" target="_blank" class="logo-link">
-                    <img src="images/spritz-logo.png" alt="SPRITZ Research Group" class="institution-logo">
-                </a>
-                <a href="https://www.unipd.it/en/" target="_blank" class="logo-link">
-                    <img src="images/unipd-logo.png" alt="University of Padua" class="institution-logo">
-                </a>
-                <a href="https://www.unicam.it/en" target="_blank" class="logo-link">
-                    <img src="images/unicam-logo.png" alt="University of Camerino" class="institution-logo">
-                </a>
+                <h2 style="margin-top: 3rem;">Universities & Research Group</h2>
+                <div class="logo-container">
+                    <a href="https://spritz.math.unipd.it/index.html" target="_blank" class="logo-link">
+                        <img src="images/spritz-logo.png" alt="SPRITZ Research Group" class="institution-logo">
+                    </a>
+                    <a href="https://www.unipd.it/en/" target="_blank" class="logo-link">
+                        <img src="images/unipd-logo.png" alt="University of Padua" class="institution-logo">
+                    </a>
+                    <a href="https://www.unicam.it/en" target="_blank" class="logo-link">
+                        <img src="images/unicam-logo.png" alt="University of Camerino" class="institution-logo">
+                    </a>
+                </div>
             </div>
+
+            <div id="resume" class="section">
+                <h2>Resume</h2>
+                
+                <h3 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Nov 2022 - Present</div>
+                            <div class="timeline-title">PhD in Blockchain and Distributed Ledger Technology</div>
+                            <div class="timeline-subtitle">University of Padua & University of Camerino, School of Advanced Studies</div>
+                            <div class="timeline-description">
+                                Research Topic: Multi-Dimensional Fuzzing Techniques for Improved Reliability in Distributed Consensus Systems
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Aug 2013 - Jan 2016</div>
+                            <div class="timeline-title">M.Tech in Wireless Communication</div>
+                            <div class="timeline-subtitle">I. K. Gujral Punjab Technical University, Punjab, India</div>
+                            <div class="timeline-description">
+                                Thesis: Suppression of Carrier Frequency Offset in LTE Uplink using MMSE Estimator and Kalman Filter
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Aug 2007 - May 2011</div>
+                            <div class="timeline-title">B.Tech in Electronics and Communication Engineering</div>
+                            <div class="timeline-subtitle">Punjab Technical University, Jalandhar, Punjab, India</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Experience
+                </h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Feb 2024 - Jul 2024</div>
+                            <div class="timeline-title">Teaching Assistant</div>
+                            <div class="timeline-subtitle">University of Padua</div>
+                            <div class="timeline-description">
+                                Teaching Assistant on Blockchain and Smart Contract Course
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Sep 2022 - Nov 2022</div>
+                            <div class="timeline-title">Pre-Doc Researcher</div>
+                            <div class="timeline-subtitle">Progetto Uni4Justice</div>
+                            <div class="timeline-description">
+                                Designed and developed innovative tools for the process office, focusing on identifying vulnerabilities 
+                                in judicial IT systems, developing programming and serialization codes for legal documents, and creating 
+                                cross-platform communication models for IT accessibility to justice using Legal methodology.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Mar 2022 - Aug 2022</div>
+                            <div class="timeline-title">Pre-Doc Researcher</div>
+                            <div class="timeline-subtitle">IOTA Foundation Project</div>
+                            <div class="timeline-description">
+                                Conducted research under the Project funded by the IOTA foundation.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Apr 2016 - Jul 2019</div>
+                            <div class="timeline-title">Network Design and Optimization Engineer</div>
+                            <div class="timeline-subtitle">Nokia Solutions & Networks India Pvt. Ltd.</div>
+                            <div class="timeline-description">
+                                Responsible for maintaining and optimizing 3G/2G network KPIs (Accessibility, Retain ability, Mobility, 
+                                Availability) through performance monitoring, troubleshooting radio statistics, parameter tuning, physical 
+                                optimizations, alarm resolution, and managing monthly TRAI data while ensuring compliance with MS-signed thresholds.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Apr 2012 - Aug 2013</div>
+                            <div class="timeline-title">RF Engineer</div>
+                            <div class="timeline-subtitle">Ericsson India Pvt. Ltd.</div>
+                            <div class="timeline-description">
+                                Responsible for monitoring and optimizing network performance, ensuring KPI targets, resolving faults, 
+                                and mentoring junior team members through training sessions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">
+                    <i class="fas fa-award"></i>
+                    Workshops
+                </h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">June 2024</div>
+                            <div class="timeline-title">Doctoral Programme of National Interest on Blockchain and Distributed Technology</div>
+                            <div class="timeline-subtitle">Palermo</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">January 2024</div>
+                            <div class="timeline-title">4th International Winter School on Blockchain Technology and Applications Hyperledger</div>
+                            <div class="timeline-subtitle">University of Camerino, Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ongoing-research" class="section">
+                <h2>Ongoing Research</h2>
+                
+                <div class="research-grid">
+                    <div class="research-card">
+                        <span class="status">Ongoing Work</span>
+                        <h3>PIN: Application-level Consensus for Blockchain-based Artificial Intelligence Frameworks</h3>
+                        <p>Currently exploring Proof-of-Intelligence (PIN), an innovative AI-driven application-level consensus framework designed for blockchain and federated learning. This research focuses on ensuring quality-assured AI enablers and developing the PIN-BOARD platform to advance decentralized AI assurance and enhance blockchain-based federated learning.</p>
+                    </div>
+
+                    <div class="research-card">
+                        <span class="status">Ongoing Work</span>
+                        <h3>UNBUG: A Novel Framework for Blockchain-based Decentralized Bug Bounty Programs</h3>
+                        <p>Currently working on UNBUG, a novel framework for blockchain-based decentralized bug bounty programs. This research focuses on developing a transparent, secure, and efficient platform for bug bounty programs using blockchain technology.</p>
+                    </div>
+
+                    <div class="research-card">
+                        <span class="status">Ongoing Work</span>
+                        <h3>AWOSE: Probabilistic State Model for Consensus Algorithms' Fuzzing Frameworks</h3>
+                        <p>AWOSE pioneers a hybrid state model for consensus fuzzing frameworks, combining Markov Chains and Hidden Markov Models to analyze both high- and low-frequency messages in blockchain consensus protocols. This innovative framework ensures a more detailed exploration of vulnerabilities, capturing latent states that traditional models overlook. </p>
+                    </div>
+
+                    <div class="research-card">
+                        <span class="status">Ongoing Work</span>
+                        <h3>COMPOTE: A Mutation Mechanism for Blockchain Consensus Fuzzing Frameworks</h3>
+                        <p>COMPOTE redefines mutation testing in fuzzing frameworks through a context-aware message pooling mechanism and prioritized mutation process. By clustering and prioritizing seed messages using advanced techniques like DBSCAN, it reduces time consumption and improves bug detection efficiency. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="publications" class="section">
+                <h2>Publications</h2>
+                
+                <h3 class="section-title">
+                    <i class="fas fa-book-open"></i>
+                    Journal Publications
+                </h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">AALMOND: Decentralized Adaptive Access Control of Multi-Party Data Sharing in Industrial Networks</div>
+                            <div class="timeline-subtitle">IEEE Internet of Things Journal</div>
+                            <div class="timeline-description">
+                                R Saha, G Kumar, M Conti, T Devgun, JJPC Rodrigues
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">GREPHRO: Nature-inspired optimization duo for Internet-of-Things</div>
+                            <div class="timeline-subtitle">Internet of Things 25, 101067</div>
+                            <div class="timeline-description">
+                                G Kumar, R Saha, M Conti, T Devgun, R Thomas
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">COUNT: Blockchain framework for resource accountability in e-healthcare</div>
+                            <div class="timeline-subtitle">Computer Communications 209, 249-259</div>
+                            <div class="timeline-description">
+                                G Kumar, R Saha, M Conti, T Devgun, R Goyat, JJPC Rodrigues
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-title">BENIGREEN: Blockchain-Based Energy-Efficient Privacy-Preserving Scheme for Green IoT</div>
+                            <div class="timeline-subtitle">IEEE Internet of Things Journal 10 (18), 16480-16493</div>
+                            <div class="timeline-description">
+                                R Goyat, G Kumar, M Conti, T Devgun, R Saha, R Thomas
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-title">Adaptive intrusion detection in edge computing using cerebellar model articulation controller and spline fit</div>
+                            <div class="timeline-subtitle">IEEE Transactions on Services Computing 16 (2), 900-912</div>
+                            <div class="timeline-description">
+                                G Kumar, R Saha, M Conti, R Thomas, T Devgun, JJPC Rodrigues
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-title">A blockchain framework in post-quantum decentralization</div>
+                            <div class="timeline-subtitle">IEEE Transactions on Services Computing 16 (1), 1-12</div>
+                            <div class="timeline-description">
+                                R Saha, G Kumar, T Devgun, WJ Buchanan, R Thomas, M Alazab
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2022</div>
+                            <div class="timeline-title">DHACS: Smart contract-based decentralized hybrid access control for industrial internet-of-things</div>
+                            <div class="timeline-subtitle">IEEE Transactions on Industrial Informatics 18 (5), 3452-3461</div>
+                            <div class="timeline-description">
+                                R Saha, G Kumar, M Conti, T Devgun, T Kim, M Alazab, R Thomas
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2022</div>
+                            <div class="timeline-title">Internet of things framework for oxygen saturation monitoring in COVID-19 environment</div>
+                            <div class="timeline-subtitle">IEEE internet of things journal 9 (5), 3631-3641</div>
+                            <div class="timeline-description">
+                                R Saha, G Kumar, N Kumar, TH Kim, T Devgun, R Thomas, A Barnawi
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2021</div>
+                            <div class="timeline-title">LiSP-XK: extended light-weight signcryption for IoT in resource-constrained environments</div>
+                            <div class="timeline-subtitle">IEEE Access 9, 100972-100980</div>
+                            <div class="timeline-description">
+                                TH Kim, G Kumar, R Saha, WJ Buchanan, T Devgun, R Thomas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    Conference Papers
+                </h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">FASALKA: Offloaded Privacy Classification for Blockchain Smart Contracts</div>
+                            <div class="timeline-subtitle">The Sixth International Conference on Blockchain Computing and Applications: BCCA 2024</div>
+                            <div class="timeline-description">
+                                T Devgun, G Kumar, M Conti
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">
+                    <i class="fas fa-users"></i>
+                    Workshops
+                </h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">June 2024</div>
+                            <div class="timeline-title">Doctoral Programme of National Interest on Blockchain and Distributed Technology</div>
+                            <div class="timeline-subtitle">Palermo</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">January 2024</div>
+                            <div class="timeline-title">4th International Winter School on Blockchain Technology and Applications Hyperledger</div>
+                            <div class="timeline-subtitle">University of Camerino, Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact" class="section">
+                <h2>Contact</h2>
+                <div class="card">
+                    <p><strong>Email:</strong> tannishtha.devgun@studenti.unipd.it</p>
+                    <p><strong>Office:</strong> Office 7D4, Torre Archimede, Department of Mathematics, Via Trieste 63, 35121 Padova (PD) - Italy</p>
+                </div>
+                <div class="card" style="margin-top: 2rem; min-height: 500px;">
+                    <div class='op-interactive' id='675a80b21b649308f3fa7499' data-title='Himanshudevgans #461 Outcome Quiz' data-url='https://outgrow813854.outgrow.us/675a80b21b649308f3fa7499?vHeight=1' data-width='100%'></div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <p>&copy; 2024 Tannishtha Devgun. All rights reserved.</p>
+            </footer>
         </div>
 
-        <div id="resume" class="section">
-            <h2>Resume</h2>
-            
-            <h3 class="section-title">Education</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Nov 2022 - Present</div>
-                        <div class="timeline-title">PhD in Blockchain and Distributed Ledger Technology</div>
-                        <div class="timeline-subtitle">University of Padua & University of Camerino, School of Advanced Studies</div>
-                        <div class="timeline-description">
-                            Research Topic: Multi-Dimensional Fuzzing Techniques for Improved Reliability in Distributed Consensus Systems
-                        </div>
-                    </div>
-                </div>
+        <script>
+            function showSection(sectionId) {
+                // Prevent scroll
+                window.scrollTo(0, 0);
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Aug 2013 - Jan 2016</div>
-                        <div class="timeline-title">M.Tech in Wireless Communication</div>
-                        <div class="timeline-subtitle">I. K. Gujral Punjab Technical University, Punjab, India</div>
-                        <div class="timeline-description">
-                            Thesis: Suppression of Carrier Frequency Offset in LTE Uplink using MMSE Estimator and Kalman Filter
-                        </div>
-                    </div>
-                </div>
+                // Hide all sections
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                });
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Aug 2007 - May 2011</div>
-                        <div class="timeline-title">B.Tech in Electronics and Communication Engineering</div>
-                        <div class="timeline-subtitle">Punjab Technical University, Jalandhar, Punjab, India</div>
-                    </div>
-                </div>
-            </div>
+                // Show selected section
+                const selectedSection = document.getElementById(sectionId);
+                if (selectedSection) {
+                    selectedSection.style.display = 'block';
+                    selectedSection.classList.add('active');
+                }
 
-            <h3 class="section-title">Experience</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Feb 2024 - Jul 2024</div>
-                        <div class="timeline-title">Teaching Assistant</div>
-                        <div class="timeline-subtitle">University of Padua</div>
-                        <div class="timeline-description">
-                            Teaching Assistant on Blockchain and Smart Contract Course
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Sep 2022 - Nov 2022</div>
-                        <div class="timeline-title">Pre-Doc Researcher</div>
-                        <div class="timeline-subtitle">Progetto Uni4Justice</div>
-                        <div class="timeline-description">
-                            Designed and developed innovative tools for the process office, focusing on identifying vulnerabilities 
-                            in judicial IT systems, developing programming and serialization codes for legal documents, and creating 
-                            cross-platform communication models for IT accessibility to justice using Legal methodology.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mar 2022 - Aug 2022</div>
-                        <div class="timeline-title">Pre-Doc Researcher</div>
-                        <div class="timeline-subtitle">IOTA Foundation Project</div>
-                        <div class="timeline-description">
-                            Conducted research under the Project funded by the IOTA foundation.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Apr 2016 - Jul 2019</div>
-                        <div class="timeline-title">Network Design and Optimization Engineer</div>
-                        <div class="timeline-subtitle">Nokia Solutions & Networks India Pvt. Ltd.</div>
-                        <div class="timeline-description">
-                            Responsible for maintaining and optimizing 3G/2G network KPIs (Accessibility, Retain ability, Mobility, 
-                            Availability) through performance monitoring, troubleshooting radio statistics, parameter tuning, physical 
-                            optimizations, alarm resolution, and managing monthly TRAI data while ensuring compliance with MS-signed thresholds.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Apr 2012 - Aug 2013</div>
-                        <div class="timeline-title">RF Engineer</div>
-                        <div class="timeline-subtitle">Ericsson India Pvt. Ltd.</div>
-                        <div class="timeline-description">
-                            Responsible for monitoring and optimizing network performance, ensuring KPI targets, resolving faults, 
-                            and mentoring junior team members through training sessions.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="ongoing-research" class="section">
-            <h2>Ongoing Research</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-title">Blockchain-based Access Control for Industrial IoT</div>
-                        <div class="timeline-subtitle">Research Focus</div>
-                        <ul class="timeline-details">
-                            <li>Developing novel decentralized access control mechanisms for industrial IoT networks</li>
-                            <li>Implementing smart contracts for automated policy enforcement</li>
-                            <li>Designing secure data sharing protocols between multiple stakeholders</li>
-                            <li>Optimizing blockchain performance for resource-constrained IoT devices</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-title">Security Analysis of IoT Protocols</div>
-                        <div class="timeline-subtitle">Current Investigation</div>
-                        <ul class="timeline-details">
-                            <li>Analyzing vulnerabilities in existing IoT communication protocols</li>
-                            <li>Developing security assessment frameworks for IoT deployments</li>
-                            <li>Proposing improvements for secure device authentication</li>
-                            <li>Studying privacy preservation in IoT data collection</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="publications" class="section">
-            <h2>Publications</h2>
-            
-            <h3 class="section-title">Journal Publications</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2024</div>
-                        <div class="timeline-title">AALMOND: Decentralized Adaptive Access Control of Multi-Party Data Sharing in Industrial Networks</div>
-                        <div class="timeline-subtitle">IEEE Internet of Things Journal</div>
-                        <div class="timeline-description">
-                            R Saha, G Kumar, M Conti, T Devgun, JJPC Rodrigues
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2024</div>
-                        <div class="timeline-title">GREPHRO: Nature-inspired optimization duo for Internet-of-Things</div>
-                        <div class="timeline-subtitle">Internet of Things 25, 101067</div>
-                        <div class="timeline-description">
-                            G Kumar, R Saha, M Conti, T Devgun, R Thomas
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2024</div>
-                        <div class="timeline-title">COUNT: Blockchain framework for resource accountability in e-healthcare</div>
-                        <div class="timeline-subtitle">Computer Communications 209, 249-259</div>
-                        <div class="timeline-description">
-                            G Kumar, R Saha, M Conti, T Devgun, R Goyat, JJPC Rodrigues
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2023</div>
-                        <div class="timeline-title">BENIGREEN: Blockchain-Based Energy-Efficient Privacy-Preserving Scheme for Green IoT</div>
-                        <div class="timeline-subtitle">IEEE Internet of Things Journal 10 (18), 16480-16493</div>
-                        <div class="timeline-description">
-                            R Goyat, G Kumar, M Conti, T Devgun, R Saha, R Thomas
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2023</div>
-                        <div class="timeline-title">Adaptive intrusion detection in edge computing using cerebellar model articulation controller and spline fit</div>
-                        <div class="timeline-subtitle">IEEE Transactions on Services Computing 16 (2), 900-912</div>
-                        <div class="timeline-description">
-                            G Kumar, R Saha, M Conti, R Thomas, T Devgun, JJPC Rodrigues
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2023</div>
-                        <div class="timeline-title">A blockchain framework in post-quantum decentralization</div>
-                        <div class="timeline-subtitle">IEEE Transactions on Services Computing 16 (1), 1-12</div>
-                        <div class="timeline-description">
-                            R Saha, G Kumar, T Devgun, WJ Buchanan, R Thomas, M Alazab
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2022</div>
-                        <div class="timeline-title">DHACS: Smart contract-based decentralized hybrid access control for industrial internet-of-things</div>
-                        <div class="timeline-subtitle">IEEE Transactions on Industrial Informatics 18 (5), 3452-3461</div>
-                        <div class="timeline-description">
-                            R Saha, G Kumar, M Conti, T Devgun, T Kim, M Alazab, R Thomas
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2022</div>
-                        <div class="timeline-title">Internet of things framework for oxygen saturation monitoring in COVID-19 environment</div>
-                        <div class="timeline-subtitle">IEEE internet of things journal 9 (5), 3631-3641</div>
-                        <div class="timeline-description">
-                            R Saha, G Kumar, N Kumar, TH Kim, T Devgun, R Thomas, A Barnawi
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2021</div>
-                        <div class="timeline-title">LiSP-XK: extended light-weight signcryption for IoT in resource-constrained environments</div>
-                        <div class="timeline-subtitle">IEEE Access 9, 100972-100980</div>
-                        <div class="timeline-description">
-                            TH Kim, G Kumar, R Saha, WJ Buchanan, T Devgun, R Thomas
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="section-title">Conference Papers</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2024</div>
-                        <div class="timeline-title">FASALKA: Offloaded Privacy Classification for Blockchain Smart Contracts</div>
-                        <div class="timeline-subtitle">The Sixth International Conference on Blockchain Computing and Applications: BCCA 2024</div>
-                        <div class="timeline-description">
-                            T Devgun, G Kumar, M Conti
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="section-title">Workshops</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">June 2024</div>
-                        <div class="timeline-title">Doctoral Programme of National Interest on Blockchain and Distributed Technology</div>
-                        <div class="timeline-subtitle">Palermo</div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">January 2024</div>
-                        <div class="timeline-title">4th International Winter School on Blockchain Technology and Applications Hyperledger</div>
-                        <div class="timeline-subtitle">University of Camerino, Italy</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="contact" class="section">
-            <h2>Contact</h2>
-            <div class="card">
-                <p><strong>Email:</strong> tannishtha.devgun@phd.unipd.it</p>
-                <p><strong>Office:</strong> DEI/G, Room 101, Via Gradenigo 6/B, 35131 Padova (PD), Italy</p>
-            </div>
-
-            <!-- Embedded Quiz -->
-            <div class="quiz-container" style="margin-top: 2rem;">
-                <!-- <h3>Interactive Quiz</h3> -->
-                <div class='op-interactive' id='675a80b21b649308f3fa7499' data-title='Himanshudevgans #461 Outcome Quiz' data-url='https://outgrow813854.outgrow.us/675a80b21b649308f3fa7499?vHeight=1' data-width='100%'></div>
-                <script>
-                    var og_temp = document.createElement('script');
-                    og_temp.async = true;
-                    og_temp.defer = true;
-                    og_temp.src = '//dyv6f9ner1ir9.cloudfront.net/assets/js/nloader.js';
-                    og_temp.onload = function() {
-                        initIframe('675a80b21b649308f3fa7499')
-                    };
-                    document.querySelector('head').appendChild(og_temp);
-                </script>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showSection(sectionId) {
-            // Prevent scroll
-            window.scrollTo(0, 0);
-
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.style.display = 'none';
-                section.classList.remove('active');
-            });
-
-            // Show selected section
-            const selectedSection = document.getElementById(sectionId);
-            if (selectedSection) {
-                selectedSection.style.display = 'block';
-                selectedSection.classList.add('active');
+                // Update active state in navigation
+                const navLinks = document.querySelectorAll('nav a');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                const activeLink = document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
             }
 
-            // Update active state in navigation
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
+            // Show About section by default
+            document.addEventListener('DOMContentLoaded', function() {
+                showSection('about');
             });
-            const activeLink = document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
+
+            function toggleMobileMenu() {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('mobile-active');
             }
-        }
-
-        // Show About section by default
-        document.addEventListener('DOMContentLoaded', function() {
-            showSection('about');
-        });
-
-        function toggleMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('mobile-active');
-        }
-    </script>
-</body>
+        </script>
+    </body>
 </html>
