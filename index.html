@@ -5,18 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tannishtha Devgun</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script>
-        window.onload = function() {
-            var script = document.createElement('script');
-            script.src = '//dyv6f9ner1ir9.cloudfront.net/assets/js/nloader.js';
-            script.onload = function() {
-                if (typeof initIframe === 'function') {
-                    initIframe('675a80b21b649308f3fa7499');
-                }
-            };
-            document.head.appendChild(script);
-        };
-    </script>
     <style>
         :root {
             --bg-color: #121212;
@@ -1013,7 +1001,7 @@
                     <p><strong>Office:</strong> Office 7D4, Torre Archimede, Department of Mathematics, Via Trieste 63, 35121 Padova (PD) - Italy</p>
                 </div>
                 <div class="card" style="margin-top: 2rem; min-height: 500px;">
-                    <div class='op-interactive' id='675a80b21b649308f3fa7499' data-title='Himanshudevgans #461 Outcome Quiz' data-url='https://outgrow813854.outgrow.us/675a80b21b649308f3fa7499?vHeight=1' data-width='100%'></div>
+                    <div class='op-interactive' id='675a80b21b649308f3fa7499' data-title='tannishtha website' data-url='https://outgrow813854.outgrow.us/675a80b21b649308f3fa7499?vHeight=1' data-width='100%'></div>
                 </div>
             </div>
 
@@ -1024,31 +1012,41 @@
 
         <script>
             function showSection(sectionId) {
-                // Prevent scroll
-                window.scrollTo(0, 0);
-
                 // Hide all sections
-                const sections = document.querySelectorAll('.section');
-                sections.forEach(section => {
+                document.querySelectorAll('.section').forEach(section => {
                     section.style.display = 'none';
-                    section.classList.remove('active');
                 });
-
-                // Show selected section
-                const selectedSection = document.getElementById(sectionId);
-                if (selectedSection) {
-                    selectedSection.style.display = 'block';
-                    selectedSection.classList.add('active');
-                }
-
-                // Update active state in navigation
-                const navLinks = document.querySelectorAll('nav a');
-                navLinks.forEach(link => {
+                
+                // Remove active class from all nav links
+                document.querySelectorAll('nav a').forEach(link => {
                     link.classList.remove('active');
                 });
-                const activeLink = document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
+                
+                // Show selected section
+                document.getElementById(sectionId).style.display = 'block';
+                
+                // Add active class to clicked nav link
+                document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+
+                // Reload Outgrow embed when showing contact section
+                if (sectionId === 'contact') {
+                    // Remove existing script if any
+                    const existingScript = document.querySelector('script[src*="nloader.js"]');
+                    if (existingScript) {
+                        existingScript.remove();
+                    }
+
+                    // Reinitialize the script
+                    var og_temp = document.createElement('script');
+                    og_temp.async = true;
+                    og_temp.defer = true;
+                    og_temp.src = '//dyv6f9ner1ir9.cloudfront.net/assets/js/nloader.js';
+                    og_temp.onload = function() {
+                        if (typeof initIframe === 'function') {
+                            initIframe('675a80b21b649308f3fa7499');
+                        }
+                    };
+                    document.querySelector('head').appendChild(og_temp);
                 }
             }
 
